@@ -5,11 +5,100 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="fav.ico">
+  <link rel="stylesheet" href="style.css">
   <title>vurtual-keyboard</title>
 </head>
 
 <body>
-
+  <header class="header container">
+    <h1 class="header__title">RSS virtual keybord</h1>
+    <textarea class="header__textarea" id="textarea" cols="30" rows="10"></textarea>
+  </header>
+  <main>
+    <section class="keyboard container">
+      <div class="keyboard__line">
+        <div class="keyboard__key backquote">ё</div>
+        <div class="keyboard__key digit1">1</div>
+        <div class="keyboard__key digit2">2</div>
+        <div class="keyboard__key digit3">3</div>
+        <div class="keyboard__key digit4">4</div>
+        <div class="keyboard__key digit5">5</div>
+        <div class="keyboard__key digit6">6</div>
+        <div class="keyboard__key digit7">7</div>
+        <div class="keyboard__key digit8">8</div>
+        <div class="keyboard__key digit9">9</div>
+        <div class="keyboard__key digit0">0</div>
+        <div class="keyboard__key minus">-</div>
+        <div class="keyboard__key equal">=</div>
+        <div class="keyboard__key backspace">← back</div>
+      </div>
+      <div class="keyboard__line">
+        <div class="keyboard__key tab">tab</div>
+        <div class="keyboard__key keyq">й</div>
+        <div class="keyboard__key keyw">ц</div>
+        <div class="keyboard__key keye">у</div>
+        <div class="keyboard__key keyr">к</div>
+        <div class="keyboard__key keyt">е</div>
+        <div class="keyboard__key keyy">н</div>
+        <div class="keyboard__key keyu">г</div>
+        <div class="keyboard__key keyi">ш</div>
+        <div class="keyboard__key keyo">щ</div>
+        <div class="keyboard__key keyp">з</div>
+        <div class="keyboard__key bracketleft">х</div>
+        <div class="keyboard__key bracketright">ъ</div>
+        <div class="keyboard__key backslash">\</div>
+      </div>
+      <div class="keyboard__line">
+        <div class="keyboard__key capslock">caps lock</div>
+        <div class="keyboard__key keya">ф</div>
+        <div class="keyboard__key keys">ы</div>
+        <div class="keyboard__key keyd">в</div>
+        <div class="keyboard__key keyf">а</div>
+        <div class="keyboard__key keyg">п</div>
+        <div class="keyboard__key keyh">р</div>
+        <div class="keyboard__key keyj">о</div>
+        <div class="keyboard__key keyk">л</div>
+        <div class="keyboard__key keyl">д</div>
+        <div class="keyboard__key semicolon">ж</div>
+        <div class="keyboard__key quote">э</div>
+        <div class="keyboard__key enter">enter</div>
+      </div>
+      <div class="keyboard__line">
+        <div class="keyboard__key shift shiftleft">shift</div>
+        <div class="keyboard__key keyz">я</div>
+        <div class="keyboard__key keyx">ч</div>
+        <div class="keyboard__key keyc">с</div>
+        <div class="keyboard__key keyv">м</div>
+        <div class="keyboard__key keyb">и</div>
+        <div class="keyboard__key keyn">т</div>
+        <div class="keyboard__key keym">ь</div>
+        <div class="keyboard__key comma">б</div>
+        <div class="keyboard__key period">ю</div>
+        <div class="keyboard__key slash">.</div>
+        <div class="keyboard__key shift shiftright">shift</div>
+      </div>
+      <div class="keyboard__line">
+        <div class="keyboard__key controlleft">ctrl</div>
+        <div class="keyboard__key metaleft">win</div>
+        <div class="keyboard__key altleft">alt</div>
+        <div class="keyboard__key space">________________</div>
+        <div class="keyboard__key altright">alt</div>
+        <div class="keyboard__key arrowleft">←</div>
+        <div class="arrows">
+          <div class="keyboard__key arrow__up arrowup">↑</div>
+          <div class="keyboard__key arrow__down arrowdown">↓</div>
+        </div>
+        <div class="keyboard__key arrowright">→</div>
+        <div class="keyboard__key controlright">ctrl</div>
+      </div>
+    </section>
+  </main>
+  <footer class="footer container">
+    <p class="footer__text">Клавиатура создана в операционной системе Windows</p>
+    <p class="footer__text">Для переключения языка комбинация: левыe ctrl + alt</p>
+  </footer>
+  <script src="script.js"></script>
 </body>
 
 </html>
