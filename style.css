@@ -144,6 +144,10 @@ body {
   text-align: center;
 }
 
+.hidden {
+  display: none;
+}
+
 .keyboard__key_active {
   border-bottom: 0px solid var(--border-color);
   background: var(--active-color);
