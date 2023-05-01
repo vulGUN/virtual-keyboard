@@ -84,7 +84,20 @@ body {
 
 .capslock,
 .enter {
+  position: relative;
   width: 75px;
+}
+
+.capslock__indicate {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  background-color: rgb(60, 255, 0);
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgb(152, 255, 124);
 }
 
 .shift {
@@ -146,6 +159,10 @@ body {
 
 .hidden {
   display: none;
+}
+
+.show {
+  display: block;
 }
 
 .keyboard__key_active {

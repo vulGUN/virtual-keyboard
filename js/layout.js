@@ -168,7 +168,9 @@ const layout = `
     </div>
   </div>
   <div class="keyboard__line">
-    <div class="keyboard__key capslock">caps</div>
+    <div class="keyboard__key capslock">caps
+      <div class="capslock__indicate"></div>
+    </div>
     <div class="keyboard__key keya">
       <div class="keyboard__rus">ф</div>
       <div class="keyboard__eng hidden">a</div>

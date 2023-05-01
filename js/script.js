@@ -29,7 +29,8 @@ const textArea = document.querySelector('.header__textarea'),
   keysEng = document.querySelectorAll('.keyboard__eng'),
   shiftKeysRus = document.querySelectorAll('.keyboard__rus_active-shift'),
   shiftKeysEng = document.querySelectorAll('.keyboard__eng_active-shift'),
-  keys = document.querySelectorAll('.keyboard__key');
+  keys = document.querySelectorAll('.keyboard__key'),
+  capsIndicator = document.querySelector('.capslock__indicate');
 
 let capslockActive = false,
   lang = localStorage.getItem('lang') ?? 'Rus';
@@ -117,14 +118,14 @@ document.addEventListener('keyup', (e) => {
 function checkCaps(key) {
   if (key === 'capslock' && !capslockActive) {
     capslockActive = true;
-    document.querySelector('.capslock').classList.add('keyboard__key_active');
+    capsIndicator.classList.add('show');
     for (let i = 0; i < keysRus.length; i++) {
       keysRus[i].textContent = keysRus[i].textContent.toUpperCase();
       keysEng[i].textContent = keysEng[i].textContent.toUpperCase();
     }
   } else if (key === 'capslock' && capslockActive) {
     capslockActive = false;
-    document.querySelector('.capslock').classList.remove('keyboard__key_active');
+    capsIndicator.classList.remove('show');
     for (let i = 0; i < keysRus.length; i++) {
       keysRus[i].textContent = keysRus[i].textContent.toLowerCase();
       keysEng[i].textContent = keysEng[i].textContent.toLowerCase();
