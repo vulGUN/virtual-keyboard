@@ -1,5 +1,10 @@
-const body = document.body,
-  textArea = document.querySelector('.header__textarea'),
+import layout from './layout.js';
+document.body.insertAdjacentHTML('afterbegin', layout);
+
+// загрузка языка при запуске страницы
+window.addEventListener('load', changeLang);
+
+const textArea = document.querySelector('.header__textarea'),
   blockKeys = [
     'tab',
     'capslock',
@@ -27,90 +32,58 @@ const body = document.body,
   keys = document.querySelectorAll('.keyboard__key');
 
 let capslockActive = false,
-  lang = localStorage.getItem('lang') ?? 'rus';
+  lang = localStorage.getItem('lang') ?? 'Rus';
 const curentArr = [];
 
 keys.forEach((i) => {
   curentArr.push(i.classList[1]);
-  i.addEventListener('click', (e) => {
+  i.addEventListener('mousedown', (e) => {
+    i.classList.add('keyboard__key_active');
     let keyClick = e.target.classList[1];
+
     if (!blockKeys.includes(i.classList[1])) {
       textArea.value += i.innerText;
     }
-    // event.key = i.classList[1];
-    // console.log(keyClick);
-    // console.dir(event);
 
     checkSwitchBtn(keyClick);
-
     checkCaps(keyClick);
+  });
+  i.addEventListener('mouseup', () => {
+    i.classList.remove('keyboard__key_active');
+  });
+  i.addEventListener('mouseleave', () => {
+    i.classList.remove('keyboard__key_active');
   });
 });
 
-// body.innerHTML = `<div class="container"></div>`;
+// действия при нажатой клавише на клавиатуре
 
 document.addEventListener('keydown', (e) => {
+  // let cursorPosition = textArea.selectionStart;
   e.preventDefault();
-  console.dir(e);
-
-  checkCurrentButtons(curentArr, e);
-
   const keyPress = e.code.toLowerCase();
 
+  checkCurrentButtons(curentArr, e);
   checkCaps(keyPress);
-
   checkSwitchBtn(keyPress);
 
   if (keyPress.includes('shift')) {
-    // upperCaseBtn();
-    if (lang === 'rus') {
-      console.log('ok rus');
-      shiftKeysRus.forEach((i) => {
-        if (i.classList.contains('keyboard__rus_active-shift')) {
-          i.classList.remove('hidden');
-        } else {
-          i.classList.add('hidden');
-        }
-      });
-      keysRus.forEach((i) => {
-        i.classList.add('hidden');
-      });
-      keysEng.forEach((i) => {
-        i.classList.add('hidden');
-      });
-      shiftKeysEng.forEach((i) => {
-        i.classList.add('hidden');
-      });
-    }
+    activeShift();
   }
 
   if ((keyPress === 'altleft' && e.ctrlKey) || (keyPress === 'controlleft' && e.altKey)) {
-    if (lang === 'rus') {
-      lang = 'eng';
+    if (lang === 'Rus') {
+      lang = 'Eng';
       localStorage.setItem('lang', lang);
       changeLang();
-      console.log('eng');
     } else {
-      lang = 'rus';
+      lang = 'Rus';
       localStorage.setItem('lang', lang);
       changeLang();
-      console.log('rus');
     }
   }
 
-  // checkButtons(curentArr, e);
-
   keys.forEach((i) => {
-    i.addEventListener('mousedown', () => {
-      i.classList.add('keyboard__key_active');
-    });
-    i.addEventListener('mouseup', () => {
-      i.classList.remove('keyboard__key_active');
-    });
-    i.addEventListener('mouseleave', () => {
-      i.classList.remove('keyboard__key_active');
-    });
-
     if (i.classList.contains(keyPress)) {
       i.classList.add('keyboard__key_active');
     }
@@ -123,29 +96,13 @@ document.addEventListener('keydown', (e) => {
   });
 });
 
+// действия при отпущеной клавише на клавиатуре
+
 document.addEventListener('keyup', (e) => {
   const keyUp = e.code.toLowerCase();
 
   if (keyUp.includes('shift')) {
-    // lowerCaseBtn();
-    if (lang === 'rus') {
-      shiftKeysRus.forEach((i) => {
-        if (i.classList.contains('keyboard__rus_active-shift')) {
-          i.classList.add('hidden');
-        } else {
-          i.classList.remove('hidden');
-        }
-      });
-      keysRus.forEach((i) => {
-        i.classList.remove('hidden');
-      });
-      keysEng.forEach((i) => {
-        i.classList.add('hidden');
-      });
-      shiftKeysEng.forEach((i) => {
-        i.classList.add('hidden');
-      });
-    }
+    deactiveShift();
   }
 
   keys.forEach((i) => {
@@ -155,33 +112,27 @@ document.addEventListener('keyup', (e) => {
   });
 });
 
-// function addActiveButton(element) {
-//   element.classList.add('keyboard__key_active');
-// }
+// проверка включенного капса и действия для него
 
 function checkCaps(key) {
   if (key === 'capslock' && !capslockActive) {
-    // upperCaseBtn();
     capslockActive = true;
+    document.querySelector('.capslock').classList.add('keyboard__key_active');
+    for (let i = 0; i < keysRus.length; i++) {
+      keysRus[i].textContent = keysRus[i].textContent.toUpperCase();
+      keysEng[i].textContent = keysEng[i].textContent.toUpperCase();
+    }
   } else if (key === 'capslock' && capslockActive) {
-    // lowerCaseBtn();
     capslockActive = false;
+    document.querySelector('.capslock').classList.remove('keyboard__key_active');
+    for (let i = 0; i < keysRus.length; i++) {
+      keysRus[i].textContent = keysRus[i].textContent.toLowerCase();
+      keysEng[i].textContent = keysEng[i].textContent.toLowerCase();
+    }
   }
 }
 
-// function lowerCaseBtn() {
-//   keys.forEach((i) => {
-//     i.innerText = i.innerText.toLowerCase();
-//   });
-// }
-
-// function upperCaseBtn() {
-//   keys.forEach((i) => {
-//     if (!blockKeys.includes(i.classList[1])) {
-//       i.innerText = i.innerText.toUpperCase();
-//     }
-//   });
-// }
+// действие функциональных кнопок (shift, space, tab ...)
 
 function checkSwitchBtn(key) {
   switch (key) {
@@ -212,6 +163,8 @@ function checkSwitchBtn(key) {
   }
 }
 
+// отсеиваю лишние кнопки, которых нет в клавиатуре
+
 function checkCurrentButtons(curentArr, e) {
   const event = e.code.toLowerCase();
   if (!curentArr.includes(event) && !blockKeys.includes(event)) {
@@ -220,9 +173,10 @@ function checkCurrentButtons(curentArr, e) {
   }
 }
 
+// смена языка и загрузка его из local storage
+
 function changeLang() {
-  const lang = localStorage.getItem('lang');
-  if (lang === 'rus') {
+  if (lang === 'Rus') {
     keysEng.forEach((i) => {
       i.classList.add('hidden');
     });
@@ -239,4 +193,42 @@ function changeLang() {
   }
 }
 
-window.addEventListener('load', changeLang);
+// действия при активном shift
+
+function activeShift() {
+  if (lang === 'Rus') {
+    for (let i = 0; i < shiftKeysRus.length; i++) {
+      shiftKeysRus[i].classList.remove('hidden');
+      keysRus[i].classList.add('hidden');
+      keysEng[i].classList.add('hidden');
+      shiftKeysEng[i].classList.add('hidden');
+    }
+  } else {
+    for (let i = 0; i < shiftKeysRus.length; i++) {
+      shiftKeysRus[i].classList.add('hidden');
+      keysRus[i].classList.add('hidden');
+      keysEng[i].classList.add('hidden');
+      shiftKeysEng[i].classList.remove('hidden');
+    }
+  }
+}
+
+// действия при неактивном shift
+
+function deactiveShift() {
+  if (lang === 'Rus') {
+    for (let i = 0; i < shiftKeysRus.length; i++) {
+      shiftKeysRus[i].classList.add('hidden');
+      keysRus[i].classList.remove('hidden');
+      keysEng[i].classList.add('hidden');
+      shiftKeysEng[i].classList.add('hidden');
+    }
+  } else {
+    for (let i = 0; i < shiftKeysRus.length; i++) {
+      shiftKeysRus[i].classList.add('hidden');
+      keysRus[i].classList.add('hidden');
+      keysEng[i].classList.remove('hidden');
+      shiftKeysEng[i].classList.add('hidden');
+    }
+  }
+}
