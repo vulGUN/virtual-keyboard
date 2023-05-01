@@ -36,6 +36,8 @@ let capslockActive = false,
   lang = localStorage.getItem('lang') ?? 'Rus';
 const curentArr = [];
 
+// действия для кликов мышью
+
 keys.forEach((i) => {
   curentArr.push(i.classList[1]);
   i.addEventListener('mousedown', (e) => {
@@ -60,7 +62,6 @@ keys.forEach((i) => {
 // действия при нажатой клавише на клавиатуре
 
 document.addEventListener('keydown', (e) => {
-  // let cursorPosition = textArea.selectionStart;
   e.preventDefault();
   const keyPress = e.code.toLowerCase();
 
@@ -144,7 +145,8 @@ function checkSwitchBtn(key) {
       textArea.value += '\n';
       break;
     case 'backspace':
-      textArea.value = textArea.value.slice(0, -1);
+      // textArea.value = textArea.value.slice(0, cursor);
+      backspace();
       break;
     case 'space':
       textArea.value += ' ';
@@ -164,6 +166,14 @@ function checkSwitchBtn(key) {
   }
 }
 
+function backspace() {
+  const cursorPosition = textArea.selectionStart,
+    textBeforeCursor = textArea.value.substring(0, cursorPosition - 1),
+    textAfterCursor = textArea.value.substring(cursorPosition);
+  textArea.value = textBeforeCursor + textAfterCursor;
+  textArea.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
+}
+
 // отсеиваю лишние кнопки, которых нет в клавиатуре
 
 function checkCurrentButtons(curentArr, e) {
@@ -178,19 +188,15 @@ function checkCurrentButtons(curentArr, e) {
 
 function changeLang() {
   if (lang === 'Rus') {
-    keysEng.forEach((i) => {
-      i.classList.add('hidden');
-    });
-    keysRus.forEach((i) => {
-      i.classList.remove('hidden');
-    });
+    for (let i = 0; i < keysRus.length; i++) {
+      keysEng[i].classList.add('hidden');
+      keysRus[i].classList.remove('hidden');
+    }
   } else {
-    keysEng.forEach((i) => {
-      i.classList.remove('hidden');
-    });
-    keysRus.forEach((i) => {
-      i.classList.add('hidden');
-    });
+    for (let i = 0; i < keysRus.length; i++) {
+      keysEng[i].classList.remove('hidden');
+      keysRus[i].classList.add('hidden');
+    }
   }
 }
 
