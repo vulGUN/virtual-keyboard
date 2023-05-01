@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="fav.ico">
+  <link rel="icon" href="./assets/img/fav.ico">
   <link rel="stylesheet" href="style.css">
   <title>vurtual-keyboard</title>
 </head>
@@ -31,6 +31,8 @@
         <div class="keyboard__key digit0">0</div>
         <div class="keyboard__key minus">-</div>
         <div class="keyboard__key equal">=</div>
+        <!-- <div class="keyboard__key backspace"><img class="backspace__img" src="./assets/img/delete-left-solid.svg"
+            alt="backspace"></div> -->
         <div class="keyboard__key backspace">← back</div>
       </div>
       <div class="keyboard__line">
@@ -50,7 +52,7 @@
         <div class="keyboard__key backslash">\</div>
       </div>
       <div class="keyboard__line">
-        <div class="keyboard__key capslock">caps lock</div>
+        <div class="keyboard__key capslock">caps</div>
         <div class="keyboard__key keya">ф</div>
         <div class="keyboard__key keys">ы</div>
         <div class="keyboard__key keyd">в</div>
@@ -81,13 +83,14 @@
       <div class="keyboard__line">
         <div class="keyboard__key controlleft">ctrl</div>
         <div class="keyboard__key metaleft">win</div>
+        <!-- <div class="keyboard__key metaleft"><img class="metaleft__img" src="./assets/img/windows.svg" alt="meta"></div> -->
         <div class="keyboard__key altleft">alt</div>
         <div class="keyboard__key space">________________</div>
         <div class="keyboard__key altright">alt</div>
         <div class="keyboard__key arrowleft">←</div>
         <div class="arrows">
-          <div class="keyboard__key arrow__up arrowup">↑</div>
-          <div class="keyboard__key arrow__down arrowdown">↓</div>
+          <div class="keyboard__key arrowup">↑</div>
+          <div class="keyboard__key arrowdown">↓</div>
         </div>
         <div class="keyboard__key arrowright">→</div>
         <div class="keyboard__key controlright">ctrl</div>
@@ -96,9 +99,9 @@
   </main>
   <footer class="footer container">
     <p class="footer__text">Клавиатура создана в операционной системе Windows</p>
-    <p class="footer__text">Для переключения языка комбинация: левыe ctrl + alt</p>
+    <p class="footer__text">Для переключения языка комбинация: левыe shift + alt</p>
   </footer>
-  <script src="script.js"></script>
+  <script src="script.js" type="module"></script>
 </body>
 
 </html>

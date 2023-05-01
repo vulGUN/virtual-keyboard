@@ -1,3 +1,9 @@
+:root {
+  --main-color: #cfdae2;
+  --border-color: #afbbc3;
+  --active-color: #d9ffd6;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -5,7 +11,7 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: #444444;
+  color: #3a3a3a;
 }
 
 .container {
@@ -29,7 +35,7 @@ body {
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
-  border: 2px solid #dedede;
+  border: 2px solid var(--border-color);
   outline: none;
   resize: none;
 }
@@ -40,8 +46,8 @@ body {
   row-gap: 4px;
   width: 100%;
   padding: 10px;
-  background: #d6dbde;
-  border-bottom: 3px solid #b1b9be;
+  background: var(--main-color);
+  border-bottom: 3px solid var(--border-color);
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -59,7 +65,7 @@ body {
   height: 38px;
   line-height: 38px;
   font-size: 16px;
-  border-bottom: 3px solid #b1b9be;
+  border-bottom: 3px solid var(--border-color);
   background: #fff;
   padding: 5px;
   text-align: center;
@@ -89,6 +95,18 @@ body {
   width: 322px;
 }
 
+.metaleft,
+.backspace {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metaleft__img,
+.backspace__img {
+  width: 44%;
+}
+
 .arrows {
   height: 50px;
   display: flex;
@@ -97,23 +115,23 @@ body {
   justify-content: space-between;
 }
 
-.arrow__up,
-.arrow__down {
+.arrowup,
+.arrowdown {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 20px;
-  border-bottom: 3px solid #b1b9be;
+  border-bottom: 3px solid var(--border-color);
   padding: 1px 5px;
   border-radius: 0;
 }
 
-.arrow__up {
+.arrowup {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
-.arrow__down {
+.arrowdown {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -127,8 +145,8 @@ body {
 }
 
 .keyboard__key_active {
-  border-bottom: 0px solid #c0cdc2;
-  background: #dcebde;
+  border-bottom: 0px solid var(--border-color);
+  background: var(--active-color);
 }
 
 /* @media (hover: hover) {
