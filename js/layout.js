@@ -161,8 +161,8 @@ const layout = `
       <div class="keyboard__eng_active-shift hidden">}</div>
     </div>
     <div class="keyboard__key backslash">
-      <div class="keyboard__rus">\</div>
-      <div class="keyboard__eng hidden">\</div>
+      <div class="keyboard__rus">\\</div>
+      <div class="keyboard__eng hidden">\\</div>
       <div class="keyboard__rus_active-shift hidden">/</div>
       <div class="keyboard__eng_active-shift hidden">|</div>
     </div>
