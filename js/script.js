@@ -48,14 +48,25 @@ keys.forEach((i) => {
       textArea.value += i.innerText;
     }
 
+    if (e.target.classList.contains('shift')) {
+      activeShift();
+    }
     checkSwitchBtn(keyClick);
     checkCaps(keyClick);
   });
-  i.addEventListener('mouseup', () => {
+  i.addEventListener('mouseup', (e) => {
     i.classList.remove('keyboard__key_active');
+
+    if (e.target.classList.contains('shift')) {
+      deactiveShift();
+    }
   });
-  i.addEventListener('mouseleave', () => {
+  i.addEventListener('mouseleave', (e) => {
     i.classList.remove('keyboard__key_active');
+
+    if (e.target.classList.contains('shift')) {
+      deactiveShift();
+    }
   });
 });
 
@@ -89,9 +100,6 @@ document.addEventListener('keydown', (e) => {
     if (i.classList.contains(keyPress)) {
       i.classList.add('keyboard__key_active');
     }
-  });
-
-  keys.forEach((i) => {
     if (!blockKeys.includes(keyPress) && i.classList.contains(keyPress)) {
       textArea.value += i.innerText;
     }
