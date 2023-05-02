@@ -1,5 +1,6 @@
-import layout from './layout.js';
-document.body.insertAdjacentHTML('afterbegin', layout);
+import init from './init.js';
+
+init();
 
 // загрузка языка при запуске страницы
 window.addEventListener('load', changeLang);
@@ -27,13 +28,13 @@ const textArea = document.querySelector('.header__textarea'),
   ],
   keysRus = document.querySelectorAll('.keyboard__rus'),
   keysEng = document.querySelectorAll('.keyboard__eng'),
-  shiftKeysRus = document.querySelectorAll('.keyboard__rus_active-shift'),
-  shiftKeysEng = document.querySelectorAll('.keyboard__eng_active-shift'),
+  shiftKeysRus = document.querySelectorAll('.keyboard__rus_activeshift'),
+  shiftKeysEng = document.querySelectorAll('.keyboard__eng_activeshift'),
   keys = document.querySelectorAll('.keyboard__key'),
   capsIndicator = document.querySelector('.capslock__indicate');
 
-let capslockActive = false,
-  lang = localStorage.getItem('lang') ?? 'Rus';
+let capslockActive = false;
+let lang = localStorage.getItem('lang') ?? 'Rus';
 const curentArr = [];
 
 // действия для кликов мышью
