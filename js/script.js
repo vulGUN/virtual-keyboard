@@ -1,6 +1,7 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-undef */
-import layout from './layout';
+// eslint-disable-next-line import/extensions
+import layout from './layout.js';
 
 // загрузка языка при запуске страницы
 window.addEventListener('load', () => {
@@ -86,6 +87,12 @@ document.addEventListener('keydown', (e) => {
       lang = 'Rus';
       localStorage.setItem('lang', lang);
       changeLang();
+    }
+  }
+
+  for (let i = 0; i < keys.length; i += 1) {
+    if (keys[i].classList.contains(keyPress)) {
+      i.classList.add('keyboard__key_active');
     }
   }
 
