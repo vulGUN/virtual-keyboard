@@ -1,39 +1,43 @@
-import layout from './layout.js';
-document.body.insertAdjacentHTML('afterbegin', layout);
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-undef */
+import layout from './layout';
 
 // загрузка языка при запуске страницы
-window.addEventListener('load', changeLang);
+window.addEventListener('load', () => {
+  document.body.insertAdjacentHTML('afterbegin', layout);
+  changeLang();
+});
 
-const textArea = document.querySelector('.header__textarea'),
-  blockKeys = [
-    'tab',
-    'capslock',
-    'enter',
-    'shift',
-    'shiftleft',
-    'shiftright',
-    'backspace',
-    'altleft',
-    'altright',
-    'controlleft',
-    'controlright',
-    'metaleft',
-    'metaright',
-    'arrowup',
-    'arrowdown',
-    'arrowleft',
-    'arrowright',
-    'space',
-  ],
-  keysRus = document.querySelectorAll('.keyboard__rus'),
-  keysEng = document.querySelectorAll('.keyboard__eng'),
-  shiftKeysRus = document.querySelectorAll('.keyboard__rus_active-shift'),
-  shiftKeysEng = document.querySelectorAll('.keyboard__eng_active-shift'),
-  keys = document.querySelectorAll('.keyboard__key'),
-  capsIndicator = document.querySelector('.capslock__indicate');
+const textArea = document.querySelector('.header__textarea');
+const blockKeys = [
+  'tab',
+  'capslock',
+  'enter',
+  'shift',
+  'shiftleft',
+  'shiftright',
+  'backspace',
+  'altleft',
+  'altright',
+  'controlleft',
+  'controlright',
+  'metaleft',
+  'metaright',
+  'arrowup',
+  'arrowdown',
+  'arrowleft',
+  'arrowright',
+  'space',
+];
+const keysRus = document.querySelectorAll('.keyboard__rus');
+const keysEng = document.querySelectorAll('.keyboard__eng');
+const shiftKeysRus = document.querySelectorAll('.keyboard__rus_active-shift');
+const shiftKeysEng = document.querySelectorAll('.keyboard__eng_active-shift');
+const keys = document.querySelectorAll('.keyboard__key');
+const capsIndicator = document.querySelector('.capslock__indicate');
 
-let capslockActive = false,
-  lang = localStorage.getItem('lang') ?? 'Rus';
+let capslockActive = false;
+let lang = localStorage.getItem('lang') !== null ? localStorage.getItem('lang') : 'Rus';
 const curentArr = [];
 
 // действия для кликов мышью
@@ -42,7 +46,7 @@ keys.forEach((i) => {
   curentArr.push(i.classList[1]);
   i.addEventListener('mousedown', (e) => {
     i.classList.add('keyboard__key_active');
-    let keyClick = e.target.classList[1];
+    const keyClick = e.target.classList[1];
 
     if (!blockKeys.includes(i.classList[1])) {
       textArea.value += i.innerText;
@@ -120,14 +124,14 @@ function checkCaps(key) {
   if (key === 'capslock' && !capslockActive) {
     capslockActive = true;
     capsIndicator.classList.add('show');
-    for (let i = 0; i < keysRus.length; i++) {
+    for (let i = 0; i < keysRus.length; i += 1) {
       keysRus[i].textContent = keysRus[i].textContent.toUpperCase();
       keysEng[i].textContent = keysEng[i].textContent.toUpperCase();
     }
   } else if (key === 'capslock' && capslockActive) {
     capslockActive = false;
     capsIndicator.classList.remove('show');
-    for (let i = 0; i < keysRus.length; i++) {
+    for (let i = 0; i < keysRus.length; i += 1) {
       keysRus[i].textContent = keysRus[i].textContent.toLowerCase();
       keysEng[i].textContent = keysEng[i].textContent.toLowerCase();
     }
@@ -145,7 +149,6 @@ function checkSwitchBtn(key) {
       textArea.value += '\n';
       break;
     case 'backspace':
-      // textArea.value = textArea.value.slice(0, cursor);
       backspace();
       break;
     case 'space':
@@ -163,22 +166,24 @@ function checkSwitchBtn(key) {
     case 'arrowright':
       textArea.value += '→';
       break;
+    default:
+      break;
   }
 }
 
 function backspace() {
-  const cursorPosition = textArea.selectionStart,
-    textBeforeCursor = textArea.value.substring(0, cursorPosition - 1),
-    textAfterCursor = textArea.value.substring(cursorPosition);
+  const cursorPosition = textArea.selectionStart;
+  const textBeforeCursor = textArea.value.substring(0, cursorPosition - 1);
+  const textAfterCursor = textArea.value.substring(cursorPosition);
   textArea.value = textBeforeCursor + textAfterCursor;
   textArea.setSelectionRange(cursorPosition - 1, cursorPosition - 1);
 }
 
 // отсеиваю лишние кнопки, которых нет в клавиатуре
 
-function checkCurrentButtons(curentArr, e) {
+function checkCurrentButtons(arr, e) {
   const event = e.code.toLowerCase();
-  if (!curentArr.includes(event) && !blockKeys.includes(event)) {
+  if (!arr.includes(event) && !blockKeys.includes(event)) {
     e.preventDefault();
     blockKeys.push(event);
   }
@@ -188,12 +193,12 @@ function checkCurrentButtons(curentArr, e) {
 
 function changeLang() {
   if (lang === 'Rus') {
-    for (let i = 0; i < keysRus.length; i++) {
+    for (let i = 0; i < keysRus.length; i += 1) {
       keysEng[i].classList.add('hidden');
       keysRus[i].classList.remove('hidden');
     }
   } else {
-    for (let i = 0; i < keysRus.length; i++) {
+    for (let i = 0; i < keysRus.length; i += 1) {
       keysEng[i].classList.remove('hidden');
       keysRus[i].classList.add('hidden');
     }
@@ -204,14 +209,14 @@ function changeLang() {
 
 function activeShift() {
   if (lang === 'Rus') {
-    for (let i = 0; i < shiftKeysRus.length; i++) {
+    for (let i = 0; i < shiftKeysRus.length; i += 1) {
       shiftKeysRus[i].classList.remove('hidden');
       keysRus[i].classList.add('hidden');
       keysEng[i].classList.add('hidden');
       shiftKeysEng[i].classList.add('hidden');
     }
   } else {
-    for (let i = 0; i < shiftKeysRus.length; i++) {
+    for (let i = 0; i < shiftKeysRus.length; i += 1) {
       shiftKeysRus[i].classList.add('hidden');
       keysRus[i].classList.add('hidden');
       keysEng[i].classList.add('hidden');
@@ -224,14 +229,14 @@ function activeShift() {
 
 function deactiveShift() {
   if (lang === 'Rus') {
-    for (let i = 0; i < shiftKeysRus.length; i++) {
+    for (let i = 0; i < shiftKeysRus.length; i += 1) {
       shiftKeysRus[i].classList.add('hidden');
       keysRus[i].classList.remove('hidden');
       keysEng[i].classList.add('hidden');
       shiftKeysEng[i].classList.add('hidden');
     }
   } else {
-    for (let i = 0; i < shiftKeysRus.length; i++) {
+    for (let i = 0; i < shiftKeysRus.length; i += 1) {
       shiftKeysRus[i].classList.add('hidden');
       keysRus[i].classList.add('hidden');
       keysEng[i].classList.remove('hidden');
